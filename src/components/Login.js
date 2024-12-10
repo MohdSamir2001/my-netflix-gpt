@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidateData } from "../utils/validate";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const toggleStatus = () => {
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setpasswordError] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
+  const handleButtonClick = () => {
+    const errorValue = checkValidateData(
+      email.current.value,
+      password.current.value
+    );
+    if (errorValue === 1) {
+      setEmailError("Please enter valid email !!");
+    }
+    if (errorValue === 2) {
+      setpasswordError("Incorrect password !!");
+    }
+  };
+  const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
   };
   return (
@@ -13,11 +30,11 @@ const Login = () => {
       </div>
       <div className="p-16 py-24">
         <div className="flex justify-center">
-          <div className="absolute z-10  rounded-lg top-40 bg-[#050302] px-8 py-12 bg-opacity-80 w-3/12">
+          <div className="absolute z-10 rounded-lg top-40 bg-[#050302] px-8 py-12 bg-opacity-80 w-3/12">
             <h1 className="text-4xl mb-6">
               {isSignIn ? "Sign In" : "Sign Up"}
             </h1>
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               {!isSignIn && (
                 <input
                   placeholder="Enter Full Name"
@@ -26,16 +43,25 @@ const Login = () => {
                 />
               )}
               <input
+                ref={email}
+                onClick={() => setEmailError("")}
                 placeholder="Enter your email or Mobile Number"
                 className="p-4 mt-4 rounded-md font-semibold bg-transparent border-[1px] border-white w-full"
                 type="text"
               />
+              <p className="font-semibold text-red-600">{emailError}</p>
               <input
+                ref={password}
+                onClick={() => setpasswordError("")}
                 placeholder="Enter your password"
                 className="p-4 rounded-md mt-4 font-semibold bg-transparent border-[1px] border-white w-full"
                 type="password"
               />
-              <button className="p-3 rounded-md mt-4 w-full font-semibold bg-[#E50914]">
+              <p className="font-semibold text-red-600">{passwordError}</p>
+              <button
+                onClick={handleButtonClick}
+                className="p-3 rounded-md mt-4 w-full font-semibold bg-[#E50914]"
+              >
                 {isSignIn ? "Sign In" : "Sign Up"}
               </button>
               <div className="mt-4 ">
@@ -43,7 +69,7 @@ const Login = () => {
                   {isSignIn ? "New to Netflix ?" : "if already registered ?"}
                 </div>
                 <div
-                  onClick={toggleStatus}
+                  onClick={toggleSignIn}
                   className="font-semibold text-center cursor-pointer"
                 >
                   {isSignIn ? "Sign Up." : "Sign In"}
