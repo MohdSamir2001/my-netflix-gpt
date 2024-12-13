@@ -8,6 +8,11 @@
 - Sign Up Form
 - Form Validation
 - useRef Hook
+- Create Sign Up User Account
+- Implement Sign In User API
+- Create Redux Store With userSlice
+- Implemented Sign Out
+- Update Profile
 
 # Features
 

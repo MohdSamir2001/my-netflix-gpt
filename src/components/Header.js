@@ -1,5 +1,4 @@
 import React from "react";
-
 const Header = () => {
   return (
     <div className="px-12 py-2 fixed top-0 w-full bg-gradient-to-b from-black flex justify-between  text-white">

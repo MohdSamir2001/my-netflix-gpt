@@ -1,17 +1,24 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
+import { addUser } from "../utils/userSlice";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignIn, setIsSignIn] = useState(true);
   const [emailError, setEmailError] = useState("");
+  const dispatch = useDispatch();
   const [passwordError, setpasswordError] = useState("");
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
   const handleButtonClick = () => {
     const errorValue = checkValidateData(
       email.current.value,
@@ -35,7 +42,26 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          // ...
+          updateProfile(user, {
+            displayName: name?.current.value,
+            photoURL:
+              "https://th.bing.com/th?q=Netflix+User+Face+Icon.+Download&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setEmailError("Error to update");
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -52,6 +78,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -79,6 +106,7 @@ const Login = () => {
             <form onSubmit={(e) => e.preventDefault()}>
               {!isSignIn && (
                 <input
+                  ref={name}
                   placeholder="Enter Full Name"
                   className="p-4 rounded-md font-semibold bg-transparent border-[1px] border-white w-full"
                   type="text"
