@@ -7,9 +7,9 @@ const VideoTitle = ({ title, description }) => {
     <div className="w-full">
       <div className="w-2/5 mb-2">
         <h1 className="text-6xl mb-2 font-medium">{title}</h1>
-        <h1 className="font-semibold mb-4 leading-5">{description}</h1>
+        <h1 className="font-semibold pl-1 mb-4 leading-5">{description}</h1>
       </div>
-      <div className="flex gap-2 font-semibold items-center">
+      <div className="flex pl-1 gap-2 font-semibold items-center">
         <div className="flex cursor-pointer gap-2 py-2 px-4 bg-slate-800 items-center">
           <h1 className="pt-[5%]">
             <IoMdPlay />

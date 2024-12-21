@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constant";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 const Header = () => {
+  const [dropheight, setdropheight] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user.user);
@@ -43,6 +45,9 @@ const Header = () => {
     // unsubscribe when components is unmounts
     return () => unsubscribe();
   }, []);
+  const handleProfileToggle = () => {
+    dropheight ? setdropheight(0) : setdropheight(32);
+  };
   return (
     <div className="px-12 pb-1 pt-1  w-full bg-gradient-to-b from-black flex justify-between  text-white">
       <div className="">
@@ -57,18 +62,34 @@ const Header = () => {
           <div className="mr-8 cursor-pointer border-[1px] rounded-full py-1 px-4 border-white font-semibold">
             English
           </div>
-          <div
-            onClick={userSignOut}
-            className="mr-6 cursor-pointer py-1 px-4 border-[1px] rounded-full border-white font-semibold"
-          >
-            Sign Out
-          </div>
           <div>
-            <img
-              className="w-12 rounded-lg cursor-pointer"
-              src={user.photoURL}
-              alt=""
-            />
+            <div
+              onClick={handleProfileToggle}
+              className="flex gap-1 cursor-pointer items-center"
+            >
+              <img className="w-12 rounded-lg" src={user.photoURL} alt="" />
+              {dropheight ? (
+                <MdArrowDropUp className="scale-150" />
+              ) : (
+                <MdArrowDropDown className="scale-150" />
+              )}
+            </div>
+            <div
+              className={`bg-black border-l-2 border-b-2 transition-all bg-opacity-80 h-${dropheight} absolute top-[100%] w-32 overflow-hidden right-0 text-black z-50`}
+            >
+              <h1
+                onClick={userSignOut}
+                className="text-white cursor-pointer border-b-2 p-2  text-center font-semibold"
+              >
+                Sign Out
+              </h1>
+              <h1 className="text-white border-b-2 cursor-pointer p-2  text-center font-semibold">
+                Edit Profile
+              </h1>
+              <h1 className="text-white cursor-pointer p-2 text-center font-semibold">
+                View History
+              </h1>
+            </div>
           </div>
         </div>
       )}

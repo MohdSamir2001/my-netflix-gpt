@@ -26,6 +26,10 @@
 - Update store with Trailer Video Data
 - Emmeded Youtube Video and make it autoplay and mute
 - Tailwind classes to make it look awesome
+- Build Secondary Component
+- Fetch top Rated Movies List
+- Build Movie Card
+- And Add Carousel Effect
 
 # Features
 
