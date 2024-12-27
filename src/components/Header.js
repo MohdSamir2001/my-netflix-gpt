@@ -9,7 +9,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constant";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 const Header = () => {
-  const [dropheight, setdropheight] = useState(0);
+  const [dropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user.user);
@@ -46,7 +46,7 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   const handleProfileToggle = () => {
-    dropheight ? setdropheight(0) : setdropheight(32);
+    setDropDown(!dropDown);
   };
   return (
     <div className="px-12 pb-1 pt-1  w-full bg-gradient-to-b from-black flex justify-between  text-white">
@@ -68,28 +68,30 @@ const Header = () => {
               className="flex gap-1 cursor-pointer items-center"
             >
               <img className="w-12 rounded-lg" src={user.photoURL} alt="" />
-              {dropheight ? (
+              {dropDown ? (
                 <MdArrowDropUp className="scale-150" />
               ) : (
                 <MdArrowDropDown className="scale-150" />
               )}
             </div>
-            <div
-              className={`bg-black border-l-2 border-b-2 transition-all bg-opacity-80 h-${dropheight} absolute top-[100%] w-32 overflow-hidden right-0 text-black z-50`}
-            >
-              <h1
-                onClick={userSignOut}
-                className="text-white cursor-pointer border-b-2 p-2  text-center font-semibold"
+            {dropDown && (
+              <div
+                className={`bg-black border-l-2 border-b-2 bg-opacity-80 h-32 absolute top-[100%] w-32 overflow-hidden right-0 text-black z-50`}
               >
-                Sign Out
-              </h1>
-              <h1 className="text-white border-b-2 cursor-pointer p-2  text-center font-semibold">
-                Edit Profile
-              </h1>
-              <h1 className="text-white cursor-pointer p-2 text-center font-semibold">
-                View History
-              </h1>
-            </div>
+                <h1
+                  onClick={userSignOut}
+                  className="text-white cursor-pointer border-b-2 p-2  text-center font-semibold"
+                >
+                  Sign Out
+                </h1>
+                <h1 className="text-white border-b-2 cursor-pointer p-2  text-center font-semibold">
+                  Edit Profile
+                </h1>
+                <h1 className="text-white cursor-pointer p-2 text-center font-semibold">
+                  View History
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       )}
