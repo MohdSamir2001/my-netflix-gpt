@@ -13,7 +13,7 @@ const MainContainer = () => {
       <div className="px-16 pt-[27%] bg-gradient-to-r aspect-video from-black absolute top-0 z-20">
         <VideoTitle title={original_title} description={overview} />
       </div>
-      <div className="w-full -mt-14 -z-10">
+      <div className="w-full -mt-24 -z-10">
         <VideoBackground movieId={id} />
       </div>
     </div>

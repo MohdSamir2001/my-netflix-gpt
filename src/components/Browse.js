@@ -14,7 +14,7 @@ const Browse = () => {
   return (
     <div className="bg-[#170D11] text-white relative">
       <div>
-        <div className="fixed bg-black bg-opacity-80 top-0 w-full z-40">
+        <div className="fixed bg-black bg-opacity-5 top-0 w-full z-40">
           <Header />
         </div>
       </div>
