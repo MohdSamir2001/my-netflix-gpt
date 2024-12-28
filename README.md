@@ -30,6 +30,9 @@
 - Fetch top Rated Movies List
 - Build Movie Card
 - And Add Carousel Effect
+- GPT Search Page
+- GPT Search Bar
+- MultiLanguage Feature
 
 # Features
 
