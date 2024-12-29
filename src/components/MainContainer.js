@@ -6,7 +6,7 @@ import VideoTitle from "./VideoTitle";
 const MainContainer = () => {
   const movies = useSelector((store) => store?.movies?.nowPlayingMovies);
   if (!movies || movies.length === 0) return; // early return
-  console.log(movies.length);
+
   const { original_title, overview, id } = movies[0];
   return (
     <div className="w-full relative">

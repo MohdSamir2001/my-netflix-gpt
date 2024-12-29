@@ -12,7 +12,7 @@ const GptSearch = () => {
           src={BACKGROUND_IMAGE_URL}
           alt="Background Image URL"
         />
-        <div className="z-30 px-16 bg-black min-h-[1080%] bg-opacity-70 w-full absolute">
+        <div className="z-30 px-4 bg-black min-h-[1080%] bg-opacity-70 w-full absolute">
           <GptSearchBar />
           <GptMovieSuggestions />
         </div>

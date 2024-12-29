@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO_URL, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
-import { toggleGptSearch } from "../utils/gptSlice";
+import { removeGptMoviesResults, toggleGptSearch } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -58,7 +58,9 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
-
+  {
+    !showGptSearch && dispatch(removeGptMoviesResults());
+  }
   return (
     <div className="px-12 pb-1 pt-1  w-full bg-gradient-to-b from-black flex justify-between  text-white">
       <div className="">

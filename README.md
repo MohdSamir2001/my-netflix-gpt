@@ -33,6 +33,8 @@
 - GPT Search Page
 - GPT Search Bar
 - MultiLanguage Feature
+- GPT Suggestions Search Movie Page
+- Memoization
 
 # Features
 

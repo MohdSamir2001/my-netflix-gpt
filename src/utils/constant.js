@@ -5,12 +5,13 @@ export const BACKGROUND_IMAGE_URL =
 export const USER_AVATAR_URL =
   "https://th.bing.com/th?q=Netflix+User+Face+Icon.+Download&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247";
 
+export const OPENAI_GPT_KEY = process.env.REACT_APP_OPENAI_KEY;
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTg1ZDU5Yjg2NTgyM2MzYTRhNTc3ZjgyNzAyMWM3NSIsIm5iZiI6MTczNDI1MDA4MS41NDIsInN1YiI6IjY3NWU4ZTYxNTUxZjY5Zjc3Y2FkZDZlZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TMUA_hP6BeGb6JHlyGhsMBkqndm9Vfvm66sTudRmEmc",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
